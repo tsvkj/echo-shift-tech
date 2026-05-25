@@ -50,7 +50,7 @@ export function Navbar() {
         <div
           className={`flex items-center justify-between px-4 py-3 md:px-6 transition-all duration-300 ${
             hasScrolled
-              ? "rounded-2xl glass-strong"
+              ? "rounded-2xl border border-white/10 bg-background/95 shadow-lg backdrop-blur-xl supports-[backdrop-filter]:bg-background/80"
               : "rounded-none bg-transparent"
           }`}
         >
