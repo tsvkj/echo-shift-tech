@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles, Code2, Bot, Workflow } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 
 export function Hero() {
@@ -50,37 +50,6 @@ export function Hero() {
           </div>
         </motion.div>
 
-        {/* Floating cards */}
-        <div className="relative mx-auto mt-24 hidden h-[280px] max-w-5xl md:block">
-          {[
-            { icon: Code2, label: "Web Dev", x: "-44%", y: 0, delay: 0 },
-            { icon: Bot, label: "AI Agents", x: "-12%", y: -40, delay: 0.2, glow: true },
-            { icon: Workflow, label: "Automation", x: "20%", y: -10, delay: 0.4 },
-            { icon: Sparkles, label: "UI / UX", x: "52%", y: -50, delay: 0.6 },
-          ].map((card, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: card.delay }}
-              className="absolute left-1/2 top-1/2"
-              style={{ transform: `translate(${card.x}, ${card.y}px)` }}
-            >
-              <div
-                className={`animate-float glass-strong flex h-32 w-44 flex-col justify-between rounded-2xl p-5 ${
-                  card.glow ? "glow-purple" : ""
-                }`}
-                style={{ animationDelay: `${i * 0.4}s` }}
-              >
-                <card.icon className="h-6 w-6 text-primary" />
-                <div>
-                  <p className="text-xs uppercase tracking-widest text-muted-foreground">Service</p>
-                  <p className="font-display text-lg font-semibold">{card.label}</p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
       </div>
     </section>
   );
