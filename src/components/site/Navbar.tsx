@@ -46,7 +46,7 @@ export function Navbar() {
           className={`flex items-center justify-between px-4 py-3 md:px-6 transition-all duration-300 ${
             scrolled
               ? "rounded-2xl glass-strong"
-              : "rounded-none bg-background border-b border-white/5"
+              : "rounded-none bg-transparent"
           }`}
         >
           <Link to="/" className="group flex items-center gap-2">
