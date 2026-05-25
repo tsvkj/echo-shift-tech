@@ -31,16 +31,24 @@ export function Navbar() {
   return (
     <motion.header
       initial={false}
-      animate={{
-        y: scrolled ? 0 : -100,
-        opacity: scrolled ? 1 : 0,
-      }}
+      animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      className="fixed left-0 right-0 top-0 z-50 py-3"
-      style={{ pointerEvents: scrolled ? "auto" : "none" }}
+      className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
+        scrolled ? "py-3" : "py-0"
+      }`}
     >
-      <div className="mx-auto max-w-7xl px-4 md:px-8">
-        <div className="flex items-center justify-between rounded-2xl glass-strong px-4 py-3 md:px-6">
+      <div
+        className={`mx-auto transition-all duration-300 ${
+          scrolled ? "max-w-7xl px-4 md:px-8" : "max-w-none px-0"
+        }`}
+      >
+        <div
+          className={`flex items-center justify-between px-4 py-3 md:px-6 transition-all duration-300 ${
+            scrolled
+              ? "rounded-2xl glass-strong"
+              : "rounded-none bg-background border-b border-white/5"
+          }`}
+        >
           <Link to="/" className="group flex items-center gap-2">
             <div className="relative">
               <div className="absolute inset-0 rounded-lg bg-primary/40 blur-md transition-all group-hover:bg-primary/60" />
