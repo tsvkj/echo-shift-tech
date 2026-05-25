@@ -12,12 +12,17 @@ const links = [
 ];
 
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+  const [hasScrolled, setHasScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const { location } = useRouterState();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => {
+      if (window.scrollY > 24) {
+        setHasScrolled(true);
+      }
+    };
+
     onScroll();
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
@@ -34,17 +39,17 @@ export function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
       className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
-        scrolled ? "py-3" : "py-0"
+        hasScrolled ? "py-3" : "py-0"
       }`}
     >
       <div
         className={`mx-auto transition-all duration-300 ${
-          scrolled ? "max-w-7xl px-4 md:px-8" : "max-w-none px-0"
+          hasScrolled ? "max-w-7xl px-4 md:px-8" : "max-w-none px-0"
         }`}
       >
         <div
           className={`flex items-center justify-between px-4 py-3 md:px-6 transition-all duration-300 ${
-            scrolled
+            hasScrolled
               ? "rounded-2xl glass-strong"
               : "rounded-none bg-transparent"
           }`}
