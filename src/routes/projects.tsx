@@ -91,7 +91,7 @@ function ProjectsPage() {
 
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((p, i) => (
-            <ProjectCard key={p.id} project={p} onOpen={setActive} index={i} />
+            <ProjectCard key={p._id} project={p} onOpen={setActive} index={i} />
           ))}
         </div>
 

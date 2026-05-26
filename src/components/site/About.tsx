@@ -63,7 +63,7 @@ export function About() {
             </p>
             <p className="mt-4 text-muted-foreground">
               My sweet spot: small teams that need a senior generalist who can move from
-              Figma to Express to fine-tuning a model — without losing sight of the business.
+              Figma to Express to fine-tuning a model without losing sight of the business.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-2">
