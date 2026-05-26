@@ -79,7 +79,7 @@ function ProjectsPage() {
                 onClick={() => setCat(c)}
                 className={`rounded-full px-4 py-2 text-xs font-medium transition-all ${
                   cat === c
-                    ? "bg-gradient-to-r from-primary to-accent text-background"
+                    ? "bg-linear-to-r from-primary to-accent text-background"
                     : "glass hover:bg-primary/10"
                 }`}
               >

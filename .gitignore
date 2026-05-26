@@ -36,3 +36,4 @@ dist-ssr
 *.sw?
 seedAdmin.js
 wrangler.jsonc
+server.js
