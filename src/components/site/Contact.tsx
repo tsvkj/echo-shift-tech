@@ -138,6 +138,10 @@ export function Contact() {
 
   const isEcommerce = form.category === "E-commerce";
 
+  // Shared className for all <select> elements so options are always readable
+  const selectClass =
+    "w-full bg-transparent text-sm outline-none [&>option]:bg-neutral-900 [&>option]:text-white";
+
   return (
     <section id="contact" className="relative py-32">
       <div className="mx-auto max-w-7xl px-4 md:px-8">
@@ -271,7 +275,7 @@ export function Contact() {
                   required
                   value={form.category}
                   onChange={(e) => updateField("category", e.target.value)}
-                  className="w-full bg-transparent text-sm outline-none"
+                  className={selectClass}
                 >
                   <option value="">Select category</option>
                   <option value="Business Website">Business Website</option>
@@ -287,7 +291,7 @@ export function Contact() {
                   required
                   value={form.timeline}
                   onChange={(e) => updateField("timeline", e.target.value)}
-                  className="w-full bg-transparent text-sm outline-none"
+                  className={selectClass}
                 >
                   <option value="">Select timeline</option>
                   <option value="ASAP">ASAP</option>
@@ -306,7 +310,7 @@ export function Contact() {
                   required
                   value={form.budget}
                   onChange={(e) => updateField("budget", e.target.value)}
-                  className="w-full bg-transparent text-sm outline-none"
+                  className={selectClass}
                 >
                   <option value="">Select budget</option>
                   <option value="< $500">Less than $500</option>
@@ -338,7 +342,7 @@ export function Contact() {
                       <select
                         value={form.websiteType}
                         onChange={(e) => updateField("websiteType", e.target.value)}
-                        className="w-full bg-transparent text-sm outline-none"
+                        className={selectClass}
                       >
                         <option value="">Select type</option>
                         <option value="Landing Page">Landing Page</option>
@@ -354,7 +358,7 @@ export function Contact() {
                       <select
                         value={form.hasDesign}
                         onChange={(e) => updateField("hasDesign", e.target.value)}
-                        className="w-full bg-transparent text-sm outline-none"
+                        className={selectClass}
                       >
                         <option value="">Select option</option>
                         <option value="Yes">Yes</option>
@@ -369,7 +373,7 @@ export function Contact() {
                       <select
                         value={form.cms}
                         onChange={(e) => updateField("cms", e.target.value)}
-                        className="w-full bg-transparent text-sm outline-none"
+                        className={selectClass}
                       >
                         <option value="">Select option</option>
                         <option value="Yes">Yes</option>
@@ -382,7 +386,7 @@ export function Contact() {
                       <select
                         value={form.needsHosting}
                         onChange={(e) => updateField("needsHosting", e.target.value)}
-                        className="w-full bg-transparent text-sm outline-none"
+                        className={selectClass}
                       >
                         <option value="">Select option</option>
                         <option value="Yes">Yes</option>
@@ -425,7 +429,7 @@ export function Contact() {
                       <select
                         value={form.aiType}
                         onChange={(e) => updateField("aiType", e.target.value)}
-                        className="w-full bg-transparent text-sm outline-none"
+                        className={selectClass}
                       >
                         <option value="">Select AI type</option>
                         <option value="AI Chatbot">AI Chatbot</option>
@@ -441,7 +445,7 @@ export function Contact() {
                       <select
                         value={form.hasApi}
                         onChange={(e) => updateField("hasApi", e.target.value)}
-                        className="w-full bg-transparent text-sm outline-none"
+                        className={selectClass}
                       >
                         <option value="">Select option</option>
                         <option value="Yes">Yes</option>
@@ -456,7 +460,7 @@ export function Contact() {
                       <select
                         value={form.apiProvider}
                         onChange={(e) => updateField("apiProvider", e.target.value)}
-                        className="w-full bg-transparent text-sm outline-none"
+                        className={selectClass}
                       >
                         <option value="">Select provider</option>
                         <option value="OpenAI">OpenAI</option>
@@ -471,7 +475,7 @@ export function Contact() {
                       <select
                         value={form.aiUsers}
                         onChange={(e) => updateField("aiUsers", e.target.value)}
-                        className="w-full bg-transparent text-sm outline-none"
+                        className={selectClass}
                       >
                         <option value="">Select scale</option>
                         <option value="Personal Use">Personal Use</option>
@@ -535,7 +539,7 @@ export function Contact() {
                       <select
                         value={form.productsCount}
                         onChange={(e) => updateField("productsCount", e.target.value)}
-                        className="w-full bg-transparent text-sm outline-none"
+                        className={selectClass}
                       >
                         <option value="">Select range</option>
                         <option value="1-10">1-10</option>
@@ -549,7 +553,7 @@ export function Contact() {
                       <select
                         value={form.paymentGateway}
                         onChange={(e) => updateField("paymentGateway", e.target.value)}
-                        className="w-full bg-transparent text-sm outline-none"
+                        className={selectClass}
                       >
                         <option value="">Select gateway</option>
                         <option value="Stripe">Stripe</option>
@@ -565,7 +569,7 @@ export function Contact() {
                     <select
                       value={form.inventorySystem}
                       onChange={(e) => updateField("inventorySystem", e.target.value)}
-                      className="w-full bg-transparent text-sm outline-none"
+                      className={selectClass}
                     >
                       <option value="">Select option</option>
                       <option value="Yes">Yes</option>
