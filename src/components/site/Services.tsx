@@ -29,7 +29,7 @@ const services = [
   {
     icon: Palette,
     title: "UI / UX Design",
-    desc: "Premium interfaces, dashboards and design systems — responsive, accessible, and a joy to use.",
+    desc: "Premium interfaces, dashboards and design systems responsive, accessible, and a joy to use.",
     items: ["Design systems", "Dashboards", "Responsive UI", "Interactive prototypes"],
   },
   {
@@ -76,7 +76,7 @@ export function Services() {
               <div className="pointer-events-none absolute -inset-px rounded-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ background: "radial-gradient(400px circle at var(--mx,50%) var(--my,50%), oklch(0.72 0.25 295 / 0.18), transparent 40%)" }} />
 
               <div className="relative">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 ring-1 ring-white/10 transition-all group-hover:from-primary/40 group-hover:to-accent/40 group-hover:shadow-[0_0_30px_-5px_oklch(0.72_0.25_295/0.6)]">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-linear-to-br from-primary/20 to-accent/20 ring-1 ring-white/10 transition-all group-hover:from-primary/40 group-hover:to-accent/40 group-hover:shadow-[0_0_30px_-5px_oklch(0.72_0.25_295/0.6)]">
                   <s.icon className="h-5 w-5 text-primary" />
                 </div>
                 <h3 className="mt-5 font-display text-xl font-semibold">{s.title}</h3>

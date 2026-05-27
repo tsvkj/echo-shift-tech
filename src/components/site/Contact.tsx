@@ -167,7 +167,7 @@ export function Contact() {
               href={`mailto:${EMAIL}`}
               className="group flex items-center gap-4 rounded-2xl glass p-5 transition-all hover:-translate-y-0.5 hover:border-primary/30"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 ring-1 ring-white/10">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-linear-to-br from-primary/20 to-accent/20 ring-1 ring-white/10">
                 <Mail className="h-5 w-5 text-primary" />
               </div>
 
@@ -181,7 +181,7 @@ export function Contact() {
               onClick={() => setPhoneOpen(true)}
               className="group flex w-full items-center gap-4 rounded-2xl glass p-5 text-left transition-all hover:-translate-y-0.5 hover:border-primary/30"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 ring-1 ring-white/10">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-linear-to-br from-primary/20 to-accent/20 ring-1 ring-white/10">
                 <Phone className="h-5 w-5 text-primary" />
               </div>
 
@@ -197,7 +197,7 @@ export function Contact() {
               rel="noreferrer"
               className="group flex items-center gap-4 rounded-2xl glass p-5 transition-all hover:-translate-y-0.5 hover:border-primary/30"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 ring-1 ring-white/10">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-linear-to-br from-primary/20 to-accent/20 ring-1 ring-white/10">
                 <MessageCircle className="h-5 w-5 text-primary" />
               </div>
 
@@ -605,7 +605,7 @@ export function Contact() {
             <button
               type="submit"
               disabled={loading}
-              className="group mt-6 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] px-6 py-3.5 text-sm font-medium text-background transition-all hover:bg-[position:100%_0] disabled:opacity-70"
+              className="group mt-6 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-linear-to-r from-primary via-accent to-primary bg-size-[200%_100%] px-6 py-3.5 text-sm font-medium text-background transition-all hover:bg-position-[100%_0] disabled:opacity-70"
             >
               {loading ? (
                 <>
@@ -632,7 +632,7 @@ export function Contact() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[80] flex items-center justify-center bg-background/80 p-4 backdrop-blur-md"
+            className="fixed inset-0 z-80 flex items-center justify-center bg-background/80 p-4 backdrop-blur-md"
             onClick={() => setPhoneOpen(false)}
           >
             <motion.div
@@ -649,7 +649,7 @@ export function Contact() {
                 <X className="h-4 w-4" />
               </button>
 
-              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-accent">
+              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-linear-to-br from-primary to-accent">
                 <Phone className="h-6 w-6 text-background" />
               </div>
 
@@ -660,7 +660,7 @@ export function Contact() {
               <div className="mt-5 grid grid-cols-2 gap-2">
                 <a
                   href={`tel:${PHONE}`}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary to-accent px-4 py-2.5 text-sm font-medium text-background"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-linear-to-r from-primary to-accent px-4 py-2.5 text-sm font-medium text-background"
                 >
                   <PhoneCall className="h-4 w-4" />
                   Call

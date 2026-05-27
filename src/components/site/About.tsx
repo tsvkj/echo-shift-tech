@@ -91,7 +91,7 @@ export function About() {
                 transition={{ duration: 0.5, delay: i * 0.08 }}
                 className="group relative overflow-hidden rounded-2xl glass p-6 transition-all hover:border-primary/30"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 opacity-0 transition-opacity group-hover:opacity-100" />
+                <div className="absolute inset-0 bg-linear-to-br from-primary/10 via-transparent to-accent/10 opacity-0 transition-opacity group-hover:opacity-100" />
                 <div className="relative">
                   <p className="font-display text-4xl font-semibold md:text-5xl">
                     <span className="gradient-text">

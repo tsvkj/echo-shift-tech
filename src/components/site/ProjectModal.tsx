@@ -74,7 +74,7 @@ export function ProjectModal({ project, onClose }: { project: Project; onClose: 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-[80] flex items-center justify-center bg-background/80 p-4 backdrop-blur-md"
+        className="fixed inset-0 z-80 flex items-center justify-center bg-background/80 p-4 backdrop-blur-md"
         onClick={onClose}
       >
         <motion.div
@@ -112,8 +112,8 @@ export function ProjectModal({ project, onClose }: { project: Project; onClose: 
 
           <div className="flex flex-col md:flex-row max-h-[92vh]">
             {/* IMAGE SECTION — 70% */}
-            <div className="relative bg-black/40 md:w-[60%] flex-shrink-0">
-              <div className="relative w-full h-64 md:h-full min-h-[500px]">
+            <div className="relative bg-black/40 md:w-[60%] shrink-0">
+              <div className="relative w-full h-64 md:h-full min-h-125">
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={currentImage.id || currentImage.url || idx}
@@ -174,7 +174,7 @@ export function ProjectModal({ project, onClose }: { project: Project; onClose: 
             </div>
 
             {/* DETAILS SECTION — 30% */}
-            <div className="md:w-[30%] flex-shrink-0 overflow-y-auto p-7 md:p-9">
+            <div className="md:w-[30%] shrink-0 overflow-y-auto p-7 md:p-9">
               <p className="text-xs uppercase tracking-widest text-primary">{project.category}</p>
 
               <h3 className="mt-2 font-display text-2xl font-semibold md:text-3xl">
@@ -228,7 +228,7 @@ export function ProjectModal({ project, onClose }: { project: Project; onClose: 
                   href={project.projectUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-8 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-accent px-5 py-2.5 text-sm font-medium text-background transition-all hover:shadow-[0_0_30px_-5px_oklch(0.72_0.25_295/0.8)]"
+                  className="mt-8 inline-flex items-center gap-2 rounded-full bg-linear-to-r from-primary to-accent px-5 py-2.5 text-sm font-medium text-background transition-all hover:shadow-[0_0_30px_-5px_oklch(0.72_0.25_295/0.8)]"
                 >
                   Visit project
                   <ExternalLink className="h-3.5 w-3.5" />

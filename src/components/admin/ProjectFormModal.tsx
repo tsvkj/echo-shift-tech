@@ -203,7 +203,7 @@ export function ProjectFormModal({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-[80] flex items-center justify-center bg-background/80 p-4 backdrop-blur-md"
+        className="fixed inset-0 z-80 flex items-center justify-center bg-background/80 p-4 backdrop-blur-md"
         onClick={onClose}
       >
         <motion.div
@@ -337,7 +337,7 @@ export function ProjectFormModal({
               <button
                 type="button"
                 onClick={addTech}
-                className="rounded-xl bg-gradient-to-r from-primary to-accent px-4 text-sm font-medium text-background"
+                className="rounded-xl bg-linear-to-r from-primary to-accent px-4 text-sm font-medium text-background"
               >
                 Add
               </button>
@@ -383,7 +383,7 @@ export function ProjectFormModal({
               <button
                 type="button"
                 onClick={addFeat}
-                className="rounded-xl bg-gradient-to-r from-primary to-accent px-4 text-sm font-medium text-background"
+                className="rounded-xl bg-linear-to-r from-primary to-accent px-4 text-sm font-medium text-background"
               >
                 Add
               </button>
@@ -537,7 +537,7 @@ export function ProjectFormModal({
               <button
                 onClick={handleSave}
                 disabled={!draft.title || loading}
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-accent px-5 py-2.5 text-sm font-medium text-background disabled:opacity-60"
+                className="inline-flex items-center gap-2 rounded-full bg-linear-to-r from-primary to-accent px-5 py-2.5 text-sm font-medium text-background disabled:opacity-60"
               >
                 <Plus className="h-4 w-4" />
 
