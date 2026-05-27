@@ -10,7 +10,6 @@ export function ProjectModal({ project, onClose }: { project: Project; onClose: 
     if (Array.isArray(project.images) && project.images.length > 0) {
       return project.images.filter((img) => img?.url);
     }
-
     return [
       {
         id: "placeholder",
@@ -36,10 +35,8 @@ export function ProjectModal({ project, onClose }: { project: Project; onClose: 
       if (e.key === "ArrowRight") setIdx((i) => (i + 1) % images.length);
       if (e.key === "ArrowLeft") setIdx((i) => (i - 1 + images.length) % images.length);
     };
-
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", onKey);
-
     return () => {
       document.body.style.overflow = "";
       window.removeEventListener("keydown", onKey);
@@ -63,8 +60,13 @@ export function ProjectModal({ project, onClose }: { project: Project; onClose: 
           exit={{ opacity: 0, scale: 0.96, y: 20 }}
           transition={{ type: "spring", damping: 24, stiffness: 220 }}
           onClick={(e) => e.stopPropagation()}
-          // Fixed height so neither side can stretch the modal
-          className="relative flex h-[90vh] w-full max-w-7xl overflow-hidden rounded-3xl glass-strong"
+          className={[
+            "relative w-full max-w-7xl overflow-hidden rounded-3xl glass-strong",
+            // Mobile: scrollable column, height grows up to 92vh
+            "flex flex-col max-h-[92vh] overflow-y-auto",
+            // Desktop: fixed height, side-by-side, no outer scroll
+            "md:flex-row md:overflow-hidden md:h-[88vh]",
+          ].join(" ")}
         >
           {/* Close */}
           <button
@@ -75,77 +77,90 @@ export function ProjectModal({ project, onClose }: { project: Project; onClose: 
             <X className="h-4 w-4" />
           </button>
 
-          {/* IMAGE SECTION — 65% */}
-          {/* Uses h-full so the image column always fills the modal height exactly */}
-          <div className="relative flex h-full w-full flex-col bg-black/40 md:w-[65%] md:shrink-0">
-            <div className="relative h-full w-full">
-              <AnimatePresence mode="wait">
-                <motion.img
-                  key={currentImage.id || currentImage.url || idx}
-                  src={currentImage.url}
-                  alt={currentImage.caption || project.title}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.25 }}
-                  // object-contain keeps full image visible; h-full + w-full fills the space
-                  className="absolute inset-0 h-full w-full object-contain"
-                />
-              </AnimatePresence>
+          {/* ── IMAGE SECTION ── */}
+          {/*
+            Mobile:  fixed aspect-ratio box so it never swallows the whole screen
+            Desktop: fills the full column height (h-full), no aspect ratio override
+          */}
+          <div
+            className={[
+              "relative shrink-0 bg-black/40",
+              // Mobile: 16/9 aspect, full width
+              "aspect-video w-full",
+              // Desktop: fixed width column, full height, drop aspect-ratio
+              "md:aspect-auto md:w-[62%] md:h-full",
+            ].join(" ")}
+          >
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={currentImage.id || currentImage.url || idx}
+                src={currentImage.url}
+                alt={currentImage.caption || project.title}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.25 }}
+                className="absolute inset-0 h-full w-full object-contain"
+              />
+            </AnimatePresence>
 
-              {/* Navigation arrows */}
-              {images.length > 1 && (
-                <>
-                  <button
-                    onClick={() => setIdx((i) => (i - 1 + images.length) % images.length)}
-                    className="absolute left-3 top-1/2 z-10 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-black/60 border border-white/20 shadow-lg transition-colors hover:bg-primary/40"
-                    aria-label="Previous image"
-                  >
-                    <ChevronLeft className="h-5 w-5 text-white" />
-                  </button>
+            {/* Navigation arrows */}
+            {images.length > 1 && (
+              <>
+                <button
+                  onClick={() => setIdx((i) => (i - 1 + images.length) % images.length)}
+                  className="absolute left-3 top-1/2 z-10 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full bg-black/60 border border-white/20 shadow-lg transition-colors hover:bg-primary/40"
+                  aria-label="Previous image"
+                >
+                  <ChevronLeft className="h-4 w-4 text-white" />
+                </button>
 
-                  <button
-                    onClick={() => setIdx((i) => (i + 1) % images.length)}
-                    className="absolute right-3 top-1/2 z-10 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-black/60 border border-white/20 shadow-lg transition-colors hover:bg-primary/40"
-                    aria-label="Next image"
-                  >
-                    <ChevronRight className="h-5 w-5 text-white" />
-                  </button>
+                <button
+                  onClick={() => setIdx((i) => (i + 1) % images.length)}
+                  className="absolute right-3 top-1/2 z-10 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full bg-black/60 border border-white/20 shadow-lg transition-colors hover:bg-primary/40"
+                  aria-label="Next image"
+                >
+                  <ChevronRight className="h-4 w-4 text-white" />
+                </button>
 
-                  {/* Dots */}
-                  <div className="absolute bottom-12 left-1/2 flex -translate-x-1/2 gap-1.5 z-10">
-                    {images.map((_, i) => (
-                      <button
-                        key={i}
-                        onClick={() => setIdx(i)}
-                        className={`h-1.5 rounded-full transition-all ${
-                          i === idx ? "w-6 bg-primary" : "w-1.5 bg-white/40"
-                        }`}
-                        aria-label={`Go to image ${i + 1}`}
-                      />
-                    ))}
-                  </div>
-                </>
-              )}
-
-              {/* Caption */}
-              {currentImage.caption && (
-                <div className="absolute bottom-0 left-0 right-0 z-10 bg-black/70 px-4 py-2.5">
-                  <p className="text-xs text-white/90 text-center truncate">
-                    {currentImage.caption}
-                  </p>
+                {/* Dots */}
+                <div className="absolute bottom-10 left-1/2 flex -translate-x-1/2 gap-1.5 z-10">
+                  {images.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setIdx(i)}
+                      className={`h-1.5 rounded-full transition-all ${
+                        i === idx ? "w-6 bg-primary" : "w-1.5 bg-white/40"
+                      }`}
+                      aria-label={`Go to image ${i + 1}`}
+                    />
+                  ))}
                 </div>
-              )}
-            </div>
+              </>
+            )}
+
+            {/* Caption */}
+            {currentImage.caption && (
+              <div className="absolute bottom-0 left-0 right-0 z-10 bg-black/70 px-4 py-2.5">
+                <p className="text-xs text-white/90 text-center truncate">
+                  {currentImage.caption}
+                </p>
+              </div>
+            )}
           </div>
 
-          {/* DETAILS SECTION — 35% */}
+          {/* ── DETAILS SECTION ── */}
           {/*
-            - h-full + overflow-y-auto: panel never grows the modal, scrolls internally instead
-            - min-w-0: lets flex children shrink and wrap text correctly
-            - Reduced padding so text has more horizontal breathing room
+            Mobile:  natural height (no h-full), no inner scroll — outer modal scrolls
+            Desktop: h-full + overflow-y-auto so only this column scrolls internally
           */}
-          <div className="flex h-full min-w-0 flex-1 flex-col overflow-y-auto p-6 md:w-[35%] md:shrink-0">
+          <div
+            className={[
+              "min-w-0 flex flex-col p-6",
+              // Desktop: fill remaining width, scroll internally
+              "md:flex-1 md:h-full md:overflow-y-auto md:p-8",
+            ].join(" ")}
+          >
             <p className="text-xs uppercase tracking-widest text-primary">{project.category}</p>
 
             <h3 className="mt-2 font-display text-2xl font-semibold md:text-3xl">
@@ -162,7 +177,6 @@ export function ProjectModal({ project, onClose }: { project: Project; onClose: 
             {project.features && project.features.length > 0 && (
               <div className="mt-6">
                 <p className="text-xs uppercase tracking-widest text-muted-foreground">Features</p>
-
                 <ul className="mt-3 space-y-2 text-sm">
                   {project.features.map((f, i) => (
                     <li key={`${f}-${i}`} className="flex items-start gap-2">
@@ -180,7 +194,6 @@ export function ProjectModal({ project, onClose }: { project: Project; onClose: 
                 <p className="text-xs uppercase tracking-widest text-muted-foreground">
                   Technologies
                 </p>
-
                 <div className="mt-3 flex flex-wrap gap-2">
                   {project.technologies.map((t) => (
                     <span key={t} className="rounded-full glass px-3 py-1 text-xs">
@@ -197,7 +210,7 @@ export function ProjectModal({ project, onClose }: { project: Project; onClose: 
                 href={project.projectUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-8 inline-flex w-fit items-center gap-2 rounded-full bg-linear-to-r from-primary to-accent px-5 py-2.5 text-sm font-medium text-background transition-all hover:shadow-[0_0_30px_-5px_oklch(0.72_0.25_295/0.8)]"
+                className="mt-8 mb-2 inline-flex w-fit items-center gap-2 rounded-full bg-linear-to-r from-primary to-accent px-5 py-2.5 text-sm font-medium text-background transition-all hover:shadow-[0_0_30px_-5px_oklch(0.72_0.25_295/0.8)]"
               >
                 Visit project
                 <ExternalLink className="h-3.5 w-3.5" />
