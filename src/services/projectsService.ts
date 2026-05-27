@@ -38,7 +38,7 @@ export interface Project {
   createdAt?: number | string;
 }
 
-const API_URL = "http://localhost:5000/api/projects";
+const API_URL = "https://echo-shift-tech-backend.vercel.app/api/projects";
 
 function getToken() {
   if (typeof window === "undefined") return null;

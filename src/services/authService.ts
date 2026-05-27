@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api";
+const API_URL = "https://echo-shift-tech-backend.vercel.app/api";
 
 const AUTH_KEY = "portfolio.auth.v1";
 
