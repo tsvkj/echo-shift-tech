@@ -12,8 +12,11 @@ import {
   Loader2,
 } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export function Contact() {
+  const { t } = useTranslation();
+
   const [phoneOpen, setPhoneOpen] = useState(false);
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -22,26 +25,18 @@ export function Contact() {
     name: "",
     email: "",
     company: "",
-
-    // Main
     category: "",
     serviceType: "",
     timeline: "",
     budget: "",
-
-    // Shared
     projectDetails: "",
     inspiration: "",
-
-    // Website
     websiteType: "",
     hasDesign: "",
     needsHosting: "",
     needsMaintenance: "",
     features: "",
     cms: "",
-
-    // AI
     aiType: "",
     hasApi: "",
     apiProvider: "",
@@ -49,8 +44,6 @@ export function Contact() {
     aiUsers: "",
     integrations: "",
     dataSource: "",
-
-    // E-commerce
     productsCount: "",
     paymentGateway: "",
     inventorySystem: "",
@@ -60,54 +53,37 @@ export function Contact() {
   const EMAIL = "hashimmuhaned951@gmail.com";
 
   const updateField = (key: string, value: string) => {
-    setForm((prev) => ({
-      ...prev,
-      [key]: value,
-    }));
+    setForm((prev) => ({ ...prev, [key]: value }));
   };
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     try {
       setLoading(true);
-
       const response = await fetch("https://formspree.io/f/xnjrovvl", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify(form),
       });
-
       if (response.ok) {
         setSent(true);
-
-        setTimeout(() => {
-          setSent(false);
-        }, 4000);
-
+        setTimeout(() => setSent(false), 4000);
         setForm({
           name: "",
           email: "",
           company: "",
-
           category: "",
           serviceType: "",
           timeline: "",
           budget: "",
-
           projectDetails: "",
           inspiration: "",
-
           websiteType: "",
           hasDesign: "",
           needsHosting: "",
           needsMaintenance: "",
           features: "",
           cms: "",
-
           aiType: "",
           hasApi: "",
           apiProvider: "",
@@ -115,7 +91,6 @@ export function Contact() {
           aiUsers: "",
           integrations: "",
           dataSource: "",
-
           productsCount: "",
           paymentGateway: "",
           inventorySystem: "",
@@ -135,10 +110,8 @@ export function Contact() {
     form.category === "Business Website";
 
   const isAI = form.category === "AI Automation" || form.category === "AI Chatbot";
-
   const isEcommerce = form.category === "E-commerce";
 
-  // Shared className for all <select> elements so options are always readable
   const selectClass =
     "w-full bg-transparent text-sm outline-none [&>option]:bg-neutral-900 [&>option]:text-white";
 
@@ -152,20 +125,19 @@ export function Contact() {
           transition={{ duration: 0.6 }}
           className="mx-auto max-w-3xl text-center"
         >
-          <p className="text-xs uppercase tracking-[0.2em] text-primary">Contact</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-primary">{t("contact.badge")}</p>
 
           <h2 className="mt-4 font-display text-4xl font-semibold md:text-5xl">
-            Have a project in mind? <span className="gradient-text">Let's talk</span>.
+            {t("contact.title1")}{" "}
+            <span className="gradient-text">{t("contact.titleHighlight")}</span>
+            {t("contact.title2")}
           </h2>
 
-          <p className="mt-4 text-muted-foreground">
-            The more details you share, the more accurate the proposal will be.
-          </p>
+          <p className="mt-4 text-muted-foreground">{t("contact.description")}</p>
         </motion.div>
 
-        {/* Grid uses items-start so children can be sticky */}
         <div className="mt-14 grid items-start gap-6 lg:grid-cols-[1fr_1.2fr]">
-          {/* LEFT — sticky container */}
+          {/* LEFT */}
           <div className="sticky top-24 space-y-4">
             <a
               href={`mailto:${EMAIL}`}
@@ -174,9 +146,10 @@ export function Contact() {
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-linear-to-br from-primary/20 to-accent/20 ring-1 ring-white/10">
                 <Mail className="h-5 w-5 text-primary" />
               </div>
-
               <div className="min-w-0 flex-1">
-                <p className="text-xs uppercase tracking-widest text-muted-foreground">Email</p>
+                <p className="text-xs uppercase tracking-widest text-muted-foreground">
+                  {t("contact.emailLabel")}
+                </p>
                 <p className="truncate font-medium">{EMAIL}</p>
               </div>
             </a>
@@ -188,9 +161,10 @@ export function Contact() {
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-linear-to-br from-primary/20 to-accent/20 ring-1 ring-white/10">
                 <Phone className="h-5 w-5 text-primary" />
               </div>
-
               <div className="min-w-0 flex-1">
-                <p className="text-xs uppercase tracking-widest text-muted-foreground">Phone</p>
+                <p className="text-xs uppercase tracking-widest text-muted-foreground">
+                  {t("contact.phoneLabel")}
+                </p>
                 <p className="font-medium">{PHONE}</p>
               </div>
             </button>
@@ -204,10 +178,11 @@ export function Contact() {
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-linear-to-br from-primary/20 to-accent/20 ring-1 ring-white/10">
                 <MessageCircle className="h-5 w-5 text-primary" />
               </div>
-
               <div>
-                <p className="text-xs uppercase tracking-widest text-muted-foreground">WhatsApp</p>
-                <p className="font-medium">Chat instantly</p>
+                <p className="text-xs uppercase tracking-widest text-muted-foreground">
+                  {t("contact.whatsappLabel")}
+                </p>
+                <p className="font-medium">{t("contact.whatsappSub")}</p>
               </div>
             </a>
 
@@ -235,89 +210,89 @@ export function Contact() {
           >
             {/* BASIC */}
             <div className="grid gap-4 md:grid-cols-2">
-              <Field label="Name">
+              <Field label={t("contact.form.name")}>
                 <input
                   required
                   value={form.name}
                   onChange={(e) => updateField("name", e.target.value)}
                   className="w-full bg-transparent text-sm outline-none"
-                  placeholder="John Doe"
+                  placeholder={t("contact.form.namePlaceholder")}
                 />
               </Field>
 
-              <Field label="Email">
+              <Field label={t("contact.form.email")}>
                 <input
                   required
                   type="email"
                   value={form.email}
                   onChange={(e) => updateField("email", e.target.value)}
                   className="w-full bg-transparent text-sm outline-none"
-                  placeholder="john@company.com"
+                  placeholder={t("contact.form.emailPlaceholder")}
                 />
               </Field>
             </div>
 
             <div className="mt-4">
-              <Field label="Company / Brand">
+              <Field label={t("contact.form.company")}>
                 <input
                   value={form.company}
                   onChange={(e) => updateField("company", e.target.value)}
                   className="w-full bg-transparent text-sm outline-none"
-                  placeholder="Optional"
+                  placeholder={t("contact.form.companyPlaceholder")}
                 />
               </Field>
             </div>
 
             {/* CATEGORY */}
             <div className="mt-4 grid gap-4 md:grid-cols-2">
-              <Field label="Project Category">
+              <Field label={t("contact.form.category")}>
                 <select
                   required
                   value={form.category}
                   onChange={(e) => updateField("category", e.target.value)}
                   className={selectClass}
                 >
-                  <option value="">Select category</option>
-                  <option value="Business Website">Business Website</option>
-                  <option value="Portfolio">Portfolio Website</option>
-                  <option value="E-commerce">E-commerce Store</option>
-                  <option value="AI Automation">AI Automation</option>
-                  <option value="AI Chatbot">AI Chatbot</option>
+                  <option value="">{t("contact.form.selectCategory")}</option>
+                  <option value="Business Website">{t("contact.form.categories.business")}</option>
+                  <option value="Portfolio">{t("contact.form.categories.portfolio")}</option>
+                  <option value="E-commerce">{t("contact.form.categories.ecommerce")}</option>
+                  <option value="AI Automation">{t("contact.form.categories.aiAutomation")}</option>
+                  <option value="AI Chatbot">{t("contact.form.categories.aiChatbot")}</option>
                 </select>
               </Field>
 
-              <Field label="Timeline">
+              <Field label={t("contact.form.timeline")}>
                 <select
                   required
                   value={form.timeline}
                   onChange={(e) => updateField("timeline", e.target.value)}
                   className={selectClass}
                 >
-                  <option value="">Select timeline</option>
-                  <option value="ASAP">ASAP</option>
-                  <option value="1-2 Weeks">1-2 Weeks</option>
-                  <option value="1 Month">1 Month</option>
-                  <option value="2-3 Months">2-3 Months</option>
-                  <option value="Flexible">Flexible</option>
+                  <option value="">{t("contact.form.selectTimeline")}</option>
+                  <option value="ASAP">{t("contact.form.timelines.asap")}</option>
+                  <option value="1-2 Weeks">{t("contact.form.timelines.twoWeeks")}</option>
+                  <option value="1 Month">{t("contact.form.timelines.oneMonth")}</option>
+                  <option value="2-3 Months">{t("contact.form.timelines.threeMonths")}</option>
+                  <option value="Flexible">{t("contact.form.timelines.flexible")}</option>
                 </select>
               </Field>
             </div>
 
             {/* BUDGET */}
             <div className="mt-4">
-              <Field label="Estimated Budget">
+              <Field label={t("contact.form.budget")}>
                 <select
                   required
                   value={form.budget}
                   onChange={(e) => updateField("budget", e.target.value)}
                   className={selectClass}
                 >
-                  <option value="">Select budget</option>
-                  <option value="< $500">Less than $500</option>
-                  <option value="$500 - $1500">$500 - $1,500</option>
-                  <option value="$1500 - $5000">$1,500 - $5,000</option>
-                  <option value="$5000+">$5,000+</option>
-                  <option value="Not Sure">Not sure yet</option>
+                  <option value="">{t("contact.form.selectBudget")}</option>
+                  <option value="< $500">{t("contact.form.budgets.under500")}</option>
+                  <option value="$500 - $1500">{t("contact.form.budgets.500to1500")}</option>
+                  <option value="$1500 - $5000">{t("contact.form.budgets.1500to5000")}</option>
+                  <option value="$5000+">{t("contact.form.budgets.5000plus")}</option>
+                  <option value="Not Sure">{t("contact.form.budgets.notSure")}</option>
                 </select>
               </Field>
             </div>
@@ -334,75 +309,79 @@ export function Contact() {
                   className="mt-6 space-y-4"
                 >
                   <div className="rounded-2xl border border-primary/20 bg-primary/5 px-4 py-3">
-                    <p className="text-sm font-medium text-primary">Website Project Questions</p>
+                    <p className="text-sm font-medium text-primary">
+                      {t("contact.website.sectionTitle")}
+                    </p>
                   </div>
 
                   <div className="grid gap-4 md:grid-cols-2">
-                    <Field label="Website Type">
+                    <Field label={t("contact.website.websiteType")}>
                       <select
                         value={form.websiteType}
                         onChange={(e) => updateField("websiteType", e.target.value)}
                         className={selectClass}
                       >
-                        <option value="">Select type</option>
-                        <option value="Landing Page">Landing Page</option>
-                        <option value="Corporate Website">Corporate Website</option>
-                        <option value="Dashboard">Dashboard</option>
-                        <option value="Portfolio">Portfolio</option>
-                        <option value="Booking System">Booking System</option>
-                        <option value="Custom Web App">Custom Web App</option>
+                        <option value="">{t("contact.form.selectType")}</option>
+                        <option value="Landing Page">{t("contact.website.types.landing")}</option>
+                        <option value="Corporate Website">
+                          {t("contact.website.types.corporate")}
+                        </option>
+                        <option value="Dashboard">{t("contact.website.types.dashboard")}</option>
+                        <option value="Portfolio">{t("contact.website.types.portfolio")}</option>
+                        <option value="Booking System">{t("contact.website.types.booking")}</option>
+                        <option value="Custom Web App">{t("contact.website.types.custom")}</option>
                       </select>
                     </Field>
 
-                    <Field label="Do you already have a design?">
+                    <Field label={t("contact.website.hasDesign")}>
                       <select
                         value={form.hasDesign}
                         onChange={(e) => updateField("hasDesign", e.target.value)}
                         className={selectClass}
                       >
-                        <option value="">Select option</option>
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                        <option value="Need Help">Need help with design</option>
+                        <option value="">{t("contact.form.selectOption")}</option>
+                        <option value="Yes">{t("contact.shared.yes")}</option>
+                        <option value="No">{t("contact.shared.no")}</option>
+                        <option value="Need Help">{t("contact.website.needHelp")}</option>
                       </select>
                     </Field>
                   </div>
 
                   <div className="grid gap-4 md:grid-cols-2">
-                    <Field label="Need CMS/Admin Dashboard?">
+                    <Field label={t("contact.website.cms")}>
                       <select
                         value={form.cms}
                         onChange={(e) => updateField("cms", e.target.value)}
                         className={selectClass}
                       >
-                        <option value="">Select option</option>
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                        <option value="Not Sure">Not sure yet</option>
+                        <option value="">{t("contact.form.selectOption")}</option>
+                        <option value="Yes">{t("contact.shared.yes")}</option>
+                        <option value="No">{t("contact.shared.no")}</option>
+                        <option value="Not Sure">{t("contact.shared.notSure")}</option>
                       </select>
                     </Field>
 
-                    <Field label="Need Hosting / Domain Setup?">
+                    <Field label={t("contact.website.hosting")}>
                       <select
                         value={form.needsHosting}
                         onChange={(e) => updateField("needsHosting", e.target.value)}
                         className={selectClass}
                       >
-                        <option value="">Select option</option>
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                        <option value="Not Sure">Not sure</option>
+                        <option value="">{t("contact.form.selectOption")}</option>
+                        <option value="Yes">{t("contact.shared.yes")}</option>
+                        <option value="No">{t("contact.shared.no")}</option>
+                        <option value="Not Sure">{t("contact.shared.notSure")}</option>
                       </select>
                     </Field>
                   </div>
 
-                  <Field label="Website Features">
+                  <Field label={t("contact.website.features")}>
                     <textarea
                       rows={4}
                       value={form.features}
                       onChange={(e) => updateField("features", e.target.value)}
                       className="w-full resize-none bg-transparent text-sm outline-none"
-                      placeholder="Authentication, dashboard, booking, payment system, admin panel..."
+                      placeholder={t("contact.website.featuresPlaceholder")}
                     />
                   </Field>
                 </motion.div>
@@ -421,98 +400,102 @@ export function Contact() {
                   className="mt-6 space-y-4"
                 >
                   <div className="rounded-2xl border border-primary/20 bg-primary/5 px-4 py-3">
-                    <p className="text-sm font-medium text-primary">AI / Automation Questions</p>
+                    <p className="text-sm font-medium text-primary">
+                      {t("contact.ai.sectionTitle")}
+                    </p>
                   </div>
 
                   <div className="grid gap-4 md:grid-cols-2">
-                    <Field label="AI Service Type">
+                    <Field label={t("contact.ai.aiType")}>
                       <select
                         value={form.aiType}
                         onChange={(e) => updateField("aiType", e.target.value)}
                         className={selectClass}
                       >
-                        <option value="">Select AI type</option>
-                        <option value="AI Chatbot">AI Chatbot</option>
-                        <option value="Workflow Automation">Workflow Automation</option>
-                        <option value="AI Agent">AI Agent</option>
-                        <option value="CRM Automation">CRM Automation</option>
-                        <option value="Lead Generation">Lead Generation</option>
-                        <option value="Custom AI Tool">Custom AI Tool</option>
+                        <option value="">{t("contact.form.selectType")}</option>
+                        <option value="AI Chatbot">{t("contact.ai.types.chatbot")}</option>
+                        <option value="Workflow Automation">
+                          {t("contact.ai.types.workflow")}
+                        </option>
+                        <option value="AI Agent">{t("contact.ai.types.agent")}</option>
+                        <option value="CRM Automation">{t("contact.ai.types.crm")}</option>
+                        <option value="Lead Generation">{t("contact.ai.types.leads")}</option>
+                        <option value="Custom AI Tool">{t("contact.ai.types.custom")}</option>
                       </select>
                     </Field>
 
-                    <Field label="Do you already have API keys?">
+                    <Field label={t("contact.ai.hasApi")}>
                       <select
                         value={form.hasApi}
                         onChange={(e) => updateField("hasApi", e.target.value)}
                         className={selectClass}
                       >
-                        <option value="">Select option</option>
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                        <option value="Need Help">Need help setting up</option>
+                        <option value="">{t("contact.form.selectOption")}</option>
+                        <option value="Yes">{t("contact.shared.yes")}</option>
+                        <option value="No">{t("contact.shared.no")}</option>
+                        <option value="Need Help">{t("contact.ai.needHelp")}</option>
                       </select>
                     </Field>
                   </div>
 
                   <div className="grid gap-4 md:grid-cols-2">
-                    <Field label="Preferred AI Provider">
+                    <Field label={t("contact.ai.provider")}>
                       <select
                         value={form.apiProvider}
                         onChange={(e) => updateField("apiProvider", e.target.value)}
                         className={selectClass}
                       >
-                        <option value="">Select provider</option>
+                        <option value="">{t("contact.form.selectProvider")}</option>
                         <option value="OpenAI">OpenAI</option>
                         <option value="Claude">Claude</option>
                         <option value="Gemini">Gemini</option>
                         <option value="DeepSeek">DeepSeek</option>
-                        <option value="Not Sure">Not sure</option>
+                        <option value="Not Sure">{t("contact.shared.notSure")}</option>
                       </select>
                     </Field>
 
-                    <Field label="Expected Number of Users">
+                    <Field label={t("contact.ai.users")}>
                       <select
                         value={form.aiUsers}
                         onChange={(e) => updateField("aiUsers", e.target.value)}
                         className={selectClass}
                       >
-                        <option value="">Select scale</option>
-                        <option value="Personal Use">Personal Use</option>
-                        <option value="Small Team">Small Team</option>
-                        <option value="Company Wide">Company Wide</option>
-                        <option value="Public SaaS">Public SaaS</option>
+                        <option value="">{t("contact.form.selectScale")}</option>
+                        <option value="Personal Use">{t("contact.ai.scales.personal")}</option>
+                        <option value="Small Team">{t("contact.ai.scales.team")}</option>
+                        <option value="Company Wide">{t("contact.ai.scales.company")}</option>
+                        <option value="Public SaaS">{t("contact.ai.scales.saas")}</option>
                       </select>
                     </Field>
                   </div>
 
-                  <Field label="Tools / Integrations Needed">
+                  <Field label={t("contact.ai.integrations")}>
                     <textarea
                       rows={3}
                       value={form.integrations}
                       onChange={(e) => updateField("integrations", e.target.value)}
                       className="w-full resize-none bg-transparent text-sm outline-none"
-                      placeholder="WhatsApp, Gmail, Slack, CRM, Shopify, Notion, Google Sheets..."
+                      placeholder={t("contact.ai.integrationsPlaceholder")}
                     />
                   </Field>
 
-                  <Field label="What process should the AI automate?">
+                  <Field label={t("contact.ai.automationGoal")}>
                     <textarea
                       rows={4}
                       value={form.automationGoal}
                       onChange={(e) => updateField("automationGoal", e.target.value)}
                       className="w-full resize-none bg-transparent text-sm outline-none"
-                      placeholder="Customer support, lead qualification, report generation, email automation..."
+                      placeholder={t("contact.ai.automationGoalPlaceholder")}
                     />
                   </Field>
 
-                  <Field label="Where will the AI get its data from?">
+                  <Field label={t("contact.ai.dataSource")}>
                     <textarea
                       rows={3}
                       value={form.dataSource}
                       onChange={(e) => updateField("dataSource", e.target.value)}
                       className="w-full resize-none bg-transparent text-sm outline-none"
-                      placeholder="PDFs, website data, CRM, spreadsheets, database..."
+                      placeholder={t("contact.ai.dataSourcePlaceholder")}
                     />
                   </Field>
                 </motion.div>
@@ -531,50 +514,52 @@ export function Contact() {
                   className="mt-6 space-y-4"
                 >
                   <div className="rounded-2xl border border-primary/20 bg-primary/5 px-4 py-3">
-                    <p className="text-sm font-medium text-primary">E-commerce Questions</p>
+                    <p className="text-sm font-medium text-primary">
+                      {t("contact.ecommerce.sectionTitle")}
+                    </p>
                   </div>
 
                   <div className="grid gap-4 md:grid-cols-2">
-                    <Field label="How many products?">
+                    <Field label={t("contact.ecommerce.productsCount")}>
                       <select
                         value={form.productsCount}
                         onChange={(e) => updateField("productsCount", e.target.value)}
                         className={selectClass}
                       >
-                        <option value="">Select range</option>
-                        <option value="1-10">1-10</option>
-                        <option value="10-50">10-50</option>
-                        <option value="50-200">50-200</option>
+                        <option value="">{t("contact.form.selectRange")}</option>
+                        <option value="1-10">1–10</option>
+                        <option value="10-50">10–50</option>
+                        <option value="50-200">50–200</option>
                         <option value="200+">200+</option>
                       </select>
                     </Field>
 
-                    <Field label="Payment Gateway">
+                    <Field label={t("contact.ecommerce.payment")}>
                       <select
                         value={form.paymentGateway}
                         onChange={(e) => updateField("paymentGateway", e.target.value)}
                         className={selectClass}
                       >
-                        <option value="">Select gateway</option>
+                        <option value="">{t("contact.form.selectGateway")}</option>
                         <option value="Stripe">Stripe</option>
                         <option value="PayPal">PayPal</option>
                         <option value="Tabby">Tabby</option>
                         <option value="Tamara">Tamara</option>
-                        <option value="Not Sure">Not sure</option>
+                        <option value="Not Sure">{t("contact.shared.notSure")}</option>
                       </select>
                     </Field>
                   </div>
 
-                  <Field label="Need inventory management?">
+                  <Field label={t("contact.ecommerce.inventory")}>
                     <select
                       value={form.inventorySystem}
                       onChange={(e) => updateField("inventorySystem", e.target.value)}
                       className={selectClass}
                     >
-                      <option value="">Select option</option>
-                      <option value="Yes">Yes</option>
-                      <option value="No">No</option>
-                      <option value="Maybe">Maybe later</option>
+                      <option value="">{t("contact.form.selectOption")}</option>
+                      <option value="Yes">{t("contact.shared.yes")}</option>
+                      <option value="No">{t("contact.shared.no")}</option>
+                      <option value="Maybe">{t("contact.ecommerce.maybeLater")}</option>
                     </select>
                   </Field>
                 </motion.div>
@@ -583,24 +568,24 @@ export function Contact() {
 
             {/* SHARED */}
             <div className="mt-6 space-y-4">
-              <Field label="Reference Websites / Inspiration">
+              <Field label={t("contact.form.inspiration")}>
                 <textarea
                   rows={3}
                   value={form.inspiration}
                   onChange={(e) => updateField("inspiration", e.target.value)}
                   className="w-full resize-none bg-transparent text-sm outline-none"
-                  placeholder="Paste websites you like or describe the style..."
+                  placeholder={t("contact.form.inspirationPlaceholder")}
                 />
               </Field>
 
-              <Field label="Project Details">
+              <Field label={t("contact.form.projectDetails")}>
                 <textarea
                   required
                   rows={6}
                   value={form.projectDetails}
                   onChange={(e) => updateField("projectDetails", e.target.value)}
                   className="w-full resize-none bg-transparent text-sm outline-none"
-                  placeholder="Describe your project, goals, audience, business model, or requirements..."
+                  placeholder={t("contact.form.projectDetailsPlaceholder")}
                 />
               </Field>
             </div>
@@ -614,13 +599,13 @@ export function Contact() {
               {loading ? (
                 <>
                   <Loader2 className="h-4 w-4 animate-spin" />
-                  Sending...
+                  {t("contact.form.sending")}
                 </>
               ) : sent ? (
-                "Message sent ✓"
+                t("contact.form.sent")
               ) : (
                 <>
-                  Send Message
+                  {t("contact.form.submit")}
                   <Send className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </>
               )}
@@ -659,7 +644,7 @@ export function Contact() {
 
               <h3 className="mt-5 font-display text-xl font-semibold">{PHONE}</h3>
 
-              <p className="mt-1 text-sm text-muted-foreground">How would you like to reach me?</p>
+              <p className="mt-1 text-sm text-muted-foreground">{t("contact.modal.subtitle")}</p>
 
               <div className="mt-5 grid grid-cols-2 gap-2">
                 <a
@@ -667,7 +652,7 @@ export function Contact() {
                   className="inline-flex items-center justify-center gap-2 rounded-xl bg-linear-to-r from-primary to-accent px-4 py-2.5 text-sm font-medium text-background"
                 >
                   <PhoneCall className="h-4 w-4" />
-                  Call
+                  {t("contact.modal.call")}
                 </a>
 
                 <a
@@ -677,7 +662,7 @@ export function Contact() {
                   className="inline-flex items-center justify-center gap-2 rounded-xl glass px-4 py-2.5 text-sm font-medium hover:bg-primary/10"
                 >
                   <MessageCircle className="h-4 w-4" />
-                  WhatsApp
+                  {t("contact.modal.whatsapp")}
                 </a>
               </div>
             </motion.div>
@@ -694,7 +679,6 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
       <span className="block text-[10px] uppercase tracking-widest text-muted-foreground">
         {label}
       </span>
-
       <div className="mt-1">{children}</div>
     </label>
   );

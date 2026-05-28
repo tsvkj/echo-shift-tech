@@ -1,0 +1,248 @@
+{
+  "navbar": {
+    "home": "Home",
+    "work": "Work",
+    "services": "Services",
+    "about": "About",
+    "contact": "Contact",
+    "hire": "Hire me"
+  },
+  "hero": {
+    "badge": "Available for new projects · Q2",
+
+    "title1": "Building modern websites &",
+
+    "titleHighlight": "AI-powered",
+
+    "title2": "solutions.",
+
+    "description": "I help local businesses and startups ship premium web experiences, intelligent automations, and AI products that actually move the needle.",
+
+    "viewWork": "View my work",
+
+    "contact": "Contact me"
+  },
+  "about": {
+    "tag": "About",
+
+    "title1": "Full-stack engineer with an",
+
+    "titleHighlight": "AI obsession",
+
+    "title2": ".",
+
+    "description1": "I design, build and ship production-grade web platforms and AI systems end-to-end. From bespoke marketing sites to GPT-powered internal tools, I partner with founders and SMBs that care about craft.",
+
+    "description2": "My sweet spot: small teams that need a senior generalist who can move from Figma to Express to fine-tuning a model without losing sight of the business.",
+
+    "stats": {
+      "projects": "Projects shipped",
+      "technologies": "Technologies",
+      "aiSolutions": "AI solutions",
+      "satisfaction": "Client satisfaction"
+    }
+  },
+  "services": {
+    "badge": "Services",
+    "title1": "Everything you need to ship a",
+    "titleHighlight": "modern, intelligent",
+    "title2": "product.",
+    "description": "Whether you're starting from scratch or layering AI onto an existing platform, I can take it from idea to production.",
+
+    "cards": {
+      "web": {
+        "title": "Web Development",
+        "desc": "Business sites, portfolios, e-commerce, custom web apps, and landing pages — all hand-built for performance.",
+        "items": ["Business websites", "E-commerce", "Custom web apps", "Landing pages"]
+      },
+
+      "automation": {
+        "title": "AI Automation",
+        "desc": "Replace repetitive ops with intelligent workflows that connect your tools, route work, and report back.",
+        "items": ["Workflow automation", "Smart routing", "Business process bots", "AI dashboards"]
+      },
+
+      "aiApps": {
+        "title": "AI-Powered Apps",
+        "desc": "Custom AI chatbots, assistants, search and recommendation systems built around your product and data.",
+        "items": ["Chatbots", "AI assistants", "Smart search", "Recommendations"]
+      },
+
+      "integration": {
+        "title": "AI Integration",
+        "desc": "Embed GPT, vector search, analytics and assistants into your existing stack without breaking it.",
+        "items": ["ChatGPT integration", "AI support", "AI analytics", "RAG pipelines"]
+      },
+
+      "design": {
+        "title": "UI / UX Design",
+        "desc": "Premium interfaces, dashboards and design systems responsive, accessible, and a joy to use.",
+        "items": ["Design systems", "Dashboards", "Responsive UI", "Interactive prototypes"]
+      },
+
+      "strategy": {
+        "title": "Strategy & Audits",
+        "desc": "Not sure where AI fits? I audit your workflows and map a pragmatic roadmap with real ROI.",
+        "items": ["AI roadmaps", "Tech audits", "Architecture review", "Hands-on workshops"]
+      }
+    }
+  },
+  "featured": {
+    "badge": "Featured work",
+    "title1": "Recent projects I'm",
+    "highlight": "proud of",
+    "viewAll": "View all work",
+    "empty": "No featured projects yet."
+  },
+
+  "projects": {
+    "visit": "Visit project",
+    "details": "More details",
+    "features": "Features",
+    "technologies": "Technologies"
+  },
+  "contact": {
+    "badge": "Contact",
+    "title1": "Have a project in mind?",
+    "titleHighlight": "Let's talk",
+    "title2": ".",
+    "description": "The more details you share, the more accurate the proposal will be.",
+
+    "emailLabel": "Email",
+    "phoneLabel": "Phone",
+    "whatsappLabel": "WhatsApp",
+    "whatsappSub": "Chat instantly",
+
+    "shared": {
+      "yes": "Yes",
+      "no": "No",
+      "notSure": "Not sure"
+    },
+
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "John Doe",
+      "email": "Email",
+      "emailPlaceholder": "john@company.com",
+      "company": "Company / Brand",
+      "companyPlaceholder": "Optional",
+      "category": "Project Category",
+      "selectCategory": "Select category",
+      "categories": {
+        "business": "Business Website",
+        "portfolio": "Portfolio Website",
+        "ecommerce": "E-commerce Store",
+        "aiAutomation": "AI Automation",
+        "aiChatbot": "AI Chatbot"
+      },
+      "timeline": "Timeline",
+      "selectTimeline": "Select timeline",
+      "timelines": {
+        "asap": "ASAP",
+        "twoWeeks": "1-2 Weeks",
+        "oneMonth": "1 Month",
+        "threeMonths": "2-3 Months",
+        "flexible": "Flexible"
+      },
+      "budget": "Estimated Budget",
+      "selectBudget": "Select budget",
+      "budgets": {
+        "under500": "Less than $500",
+        "500to1500": "$500 – $1,500",
+        "1500to5000": "$1,500 – $5,000",
+        "5000plus": "$5,000+",
+        "notSure": "Not sure yet"
+      },
+      "selectOption": "Select option",
+      "selectType": "Select type",
+      "selectProvider": "Select provider",
+      "selectScale": "Select scale",
+      "selectRange": "Select range",
+      "selectGateway": "Select gateway",
+      "inspiration": "Reference Websites / Inspiration",
+      "inspirationPlaceholder": "Paste websites you like or describe the style...",
+      "projectDetails": "Project Details",
+      "projectDetailsPlaceholder": "Describe your project, goals, audience, business model, or requirements...",
+      "submit": "Send Message",
+      "sending": "Sending...",
+      "sent": "Message sent ✓"
+    },
+
+    "website": {
+      "sectionTitle": "Website Project Questions",
+      "websiteType": "Website Type",
+      "types": {
+        "landing": "Landing Page",
+        "corporate": "Corporate Website",
+        "dashboard": "Dashboard",
+        "portfolio": "Portfolio",
+        "booking": "Booking System",
+        "custom": "Custom Web App"
+      },
+      "hasDesign": "Do you already have a design?",
+      "needHelp": "Need help with design",
+      "cms": "Need CMS / Admin Dashboard?",
+      "hosting": "Need Hosting / Domain Setup?",
+      "features": "Website Features",
+      "featuresPlaceholder": "Authentication, dashboard, booking, payment system, admin panel..."
+    },
+
+    "ai": {
+      "sectionTitle": "AI / Automation Questions",
+      "aiType": "AI Service Type",
+      "types": {
+        "chatbot": "AI Chatbot",
+        "workflow": "Workflow Automation",
+        "agent": "AI Agent",
+        "crm": "CRM Automation",
+        "leads": "Lead Generation",
+        "custom": "Custom AI Tool"
+      },
+      "hasApi": "Do you already have API keys?",
+      "needHelp": "Need help setting up",
+      "provider": "Preferred AI Provider",
+      "users": "Expected Number of Users",
+      "scales": {
+        "personal": "Personal Use",
+        "team": "Small Team",
+        "company": "Company Wide",
+        "saas": "Public SaaS"
+      },
+      "integrations": "Tools / Integrations Needed",
+      "integrationsPlaceholder": "WhatsApp, Gmail, Slack, CRM, Shopify, Notion, Google Sheets...",
+      "automationGoal": "What process should the AI automate?",
+      "automationGoalPlaceholder": "Customer support, lead qualification, report generation, email automation...",
+      "dataSource": "Where will the AI get its data from?",
+      "dataSourcePlaceholder": "PDFs, website data, CRM, spreadsheets, database..."
+    },
+
+    "ecommerce": {
+      "sectionTitle": "E-commerce Questions",
+      "productsCount": "How many products?",
+      "payment": "Payment Gateway",
+      "inventory": "Need inventory management?",
+      "maybeLater": "Maybe later"
+    },
+
+    "modal": {
+      "subtitle": "How would you like to reach me?",
+      "call": "Call",
+      "whatsapp": "WhatsApp"
+    }
+  },
+  "projectsPage": {
+    "badge": "All Projects",
+    "title1": "The full",
+    "highlight": "portfolio",
+    "description": "Search, filter, and dive into every shipped project.",
+    "search": "Search projects, tech…",
+    "empty": "No projects match your filter.",
+    "categories": {
+      "All": "All",
+      "Web": "Web",
+      "AI": "AI",
+      "Automation": "Automation",
+      "UI/UX": "UI/UX"
+    }
+  }
+}

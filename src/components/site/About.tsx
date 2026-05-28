@@ -1,34 +1,39 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-
-const stats = [
-  { value: 80, suffix: "+", label: "Projects shipped" },
-  { value: 40, suffix: "+", label: "Technologies" },
-  { value: 25, suffix: "+", label: "AI solutions" },
-  { value: 99, suffix: "%", label: "Client satisfaction" },
-];
+import { useTranslation } from "react-i18next";
 
 function Counter({ to, suffix }: { to: number; suffix: string }) {
   const [n, setN] = useState(0);
+
   const ref = useRef<HTMLSpanElement>(null);
+
   const started = useRef(false);
 
   useEffect(() => {
     const obs = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting && !started.current) {
         started.current = true;
+
         const dur = 1400;
+
         const start = performance.now();
+
         const tick = (t: number) => {
           const p = Math.min((t - start) / dur, 1);
+
           const eased = 1 - Math.pow(1 - p, 3);
+
           setN(Math.round(to * eased));
+
           if (p < 1) requestAnimationFrame(tick);
         };
+
         requestAnimationFrame(tick);
       }
     });
+
     if (ref.current) obs.observe(ref.current);
+
     return () => obs.disconnect();
   }, [to]);
 
@@ -41,6 +46,51 @@ function Counter({ to, suffix }: { to: number; suffix: string }) {
 }
 
 export function About() {
+  const { t, i18n } = useTranslation();
+
+  const isArabic = i18n.language === "ar";
+
+  const stats = [
+    {
+      value: 80,
+      suffix: "+",
+      label: t("about.stats.projects"),
+    },
+
+    {
+      value: 40,
+      suffix: "+",
+      label: t("about.stats.technologies"),
+    },
+
+    {
+      value: 25,
+      suffix: "+",
+      label: t("about.stats.aiSolutions"),
+    },
+
+    {
+      value: 99,
+      suffix: "%",
+      label: t("about.stats.satisfaction"),
+    },
+  ];
+
+  const techStack = [
+    "React",
+    "Next.js",
+    "TypeScript",
+    "Node.js",
+    "MongoDB",
+    "OpenAI",
+    "LangChain",
+    "Tailwind",
+    "Framer Motion",
+    "n8n",
+    "PostgreSQL",
+    "AWS",
+  ];
+
   return (
     <section id="about" className="relative py-32">
       <div className="mx-auto max-w-7xl px-4 md:px-8">
@@ -50,32 +100,26 @@ export function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
+            className={isArabic ? "text-right" : ""}
           >
-            <p className="text-xs uppercase tracking-[0.2em] text-primary">About</p>
-            <h2 className="mt-4 font-display text-4xl font-semibold md:text-5xl">
-              Full-stack engineer with an{" "}
-              <span className="gradient-text">AI obsession</span>.
-            </h2>
-            <p className="mt-6 text-muted-foreground">
-              I design, build and ship production-grade web platforms and AI systems
-              end-to-end. From bespoke marketing sites to GPT-powered internal tools, I
-              partner with founders and SMBs that care about craft.
-            </p>
-            <p className="mt-4 text-muted-foreground">
-              My sweet spot: small teams that need a senior generalist who can move from
-              Figma to Express to fine-tuning a model without losing sight of the business.
-            </p>
+            <p className="text-xs uppercase tracking-[0.2em] text-primary">{t("about.tag")}</p>
 
-            <div className="mt-8 flex flex-wrap gap-2">
-              {[
-                "React", "Next.js", "TypeScript", "Node.js", "MongoDB", "OpenAI",
-                "LangChain", "Tailwind", "Framer Motion", "n8n", "PostgreSQL", "AWS",
-              ].map((t) => (
+            <h2 className="mt-4 font-display text-4xl font-semibold md:text-5xl">
+              {t("about.title1")} <span className="gradient-text">{t("about.titleHighlight")}</span>
+              {t("about.title2")}
+            </h2>
+
+            <p className="mt-6 text-muted-foreground">{t("about.description1")}</p>
+
+            <p className="mt-4 text-muted-foreground">{t("about.description2")}</p>
+
+            <div className={`mt-8 flex flex-wrap gap-2 ${isArabic ? "justify-end" : ""}`}>
+              {techStack.map((tech) => (
                 <span
-                  key={t}
+                  key={tech}
                   className="rounded-full glass px-3 py-1 text-xs text-muted-foreground"
                 >
-                  {t}
+                  {tech}
                 </span>
               ))}
             </div>
@@ -88,16 +132,21 @@ export function About() {
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
+                transition={{
+                  duration: 0.5,
+                  delay: i * 0.08,
+                }}
                 className="group relative overflow-hidden rounded-2xl glass p-6 transition-all hover:border-primary/30"
               >
                 <div className="absolute inset-0 bg-linear-to-br from-primary/10 via-transparent to-accent/10 opacity-0 transition-opacity group-hover:opacity-100" />
+
                 <div className="relative">
                   <p className="font-display text-4xl font-semibold md:text-5xl">
                     <span className="gradient-text">
                       <Counter to={s.value} suffix={s.suffix} />
                     </span>
                   </p>
+
                   <p className="mt-2 text-sm text-muted-foreground">{s.label}</p>
                 </div>
               </motion.div>

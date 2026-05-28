@@ -1,3 +1,8 @@
+export type LocalizedString = {
+  en: string;
+  ar: string;
+};
+
 export interface ProjectImage {
   id?: string;
 
@@ -17,11 +22,11 @@ export interface ProjectImage {
 export interface Project {
   _id?: string;
 
-  title: string;
+  title: LocalizedString;
 
-  shortDescription: string;
+  shortDescription: LocalizedString;
 
-  description: string;
+  description: LocalizedString;
 
   technologies: string[];
 
@@ -38,7 +43,8 @@ export interface Project {
   createdAt?: number | string;
 }
 
-const API_URL = "https://echo-shift-tech-backend.vercel.app/api/projects";
+// const API_URL = "https://echo-shift-tech-backend.vercel.app/api/projects";
+const API_URL = "http://localhost:5000/api/projects";
 
 function getToken() {
   if (typeof window === "undefined") return null;
@@ -168,35 +174,29 @@ export const projectsService = {
   toFormData(project: Partial<Project>, deletedImages: string[] = []) {
     const formData = new FormData();
 
-    formData.append("title", project.title || "");
-
-    formData.append("shortDescription", project.shortDescription || "");
-
-    formData.append("description", project.description || "");
+    // ===============================
+    // LOCALIZED FIELDS (IMPORTANT FIX)
+    // ===============================
+    formData.append("title", project.title?.en || "");
+    formData.append("shortDescription", project.shortDescription?.en || "");
+    formData.append("description", project.description?.en || "");
 
     formData.append("projectUrl", project.projectUrl || "");
-
     formData.append("category", project.category || "Web");
-
     formData.append("featured", String(project.featured));
 
     formData.append("technologies", JSON.stringify(project.technologies || []));
-
     formData.append("features", JSON.stringify(project.features || []));
 
     // ====================================
     // EXISTING IMAGES
     // ====================================
-
     const existingImages = (project.images || [])
       .filter((img) => !img.file)
       .map((img) => ({
         url: img.url,
-
         public_id: img.public_id,
-
         caption: img.caption || "",
-
         isMain: img.isMain || false,
       }));
 
@@ -205,9 +205,11 @@ export const projectsService = {
     // ====================================
     // DELETED IMAGES
     // ====================================
-
     formData.append("deletedImages", JSON.stringify(deletedImages));
 
+    // ====================================
+    // NEW IMAGES META
+    // ====================================
     const newImagesMeta = (project.images || [])
       .filter((img) => img.file)
       .map((img) => ({
@@ -220,7 +222,6 @@ export const projectsService = {
     // ====================================
     // NEW FILES
     // ====================================
-
     project.images?.forEach((img) => {
       if (img.file) {
         formData.append("images", img.file);

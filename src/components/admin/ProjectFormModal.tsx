@@ -10,9 +10,9 @@ type Draft = Omit<Project, "createdAt"> & {
 };
 
 const EMPTY: Draft = {
-  title: "",
-  shortDescription: "",
-  description: "",
+  title: { en: "", ar: "" },
+  shortDescription: { en: "", ar: "" },
+  description: { en: "", ar: "" },
   technologies: [],
   projectUrl: "",
   category: "Web",
@@ -245,11 +245,14 @@ export function ProjectFormModal({
             <Field label="Title">
               <input
                 className="w-full bg-transparent text-sm outline-none"
-                value={draft.title}
+                value={draft.title.en}
                 onChange={(e) =>
                   setDraft({
                     ...draft,
-                    title: e.target.value,
+                    title: {
+                      ...draft.title,
+                      en: e.target.value,
+                    },
                   })
                 }
               />
@@ -292,12 +295,14 @@ export function ProjectFormModal({
             <Field label="Short description" className="md:col-span-2">
               <input
                 className="w-full bg-transparent text-sm outline-none"
-                value={draft.shortDescription}
+                value={draft.shortDescription.en}
                 onChange={(e) =>
                   setDraft({
                     ...draft,
-
-                    shortDescription: e.target.value,
+                    shortDescription: {
+                      ...draft.shortDescription,
+                      en: e.target.value,
+                    },
                   })
                 }
               />
@@ -307,12 +312,14 @@ export function ProjectFormModal({
               <textarea
                 rows={5}
                 className="w-full resize-none bg-transparent text-sm outline-none"
-                value={draft.description}
+                value={draft.description.en}
                 onChange={(e) =>
                   setDraft({
                     ...draft,
-
-                    description: e.target.value,
+                    description: {
+                      ...draft.description,
+                      en: e.target.value,
+                    },
                   })
                 }
               />

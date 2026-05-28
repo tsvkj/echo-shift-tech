@@ -2,7 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
-import { LogOut, Pencil, Plus, RotateCcw, Sparkles, Trash2 } from "lucide-react";
+import { LogOut, Pencil, Plus, Sparkles, Trash2 } from "lucide-react";
 
 import { authService } from "@/services/authService";
 
@@ -43,10 +43,7 @@ function AdminDashboard() {
       const valid = await authService.verifyToken();
 
       if (!valid) {
-        navigate({
-          to: "/admin/login",
-        });
-
+        navigate({ to: "/admin/login" });
         return;
       }
 
@@ -61,7 +58,6 @@ function AdminDashboard() {
   const refresh = async () => {
     try {
       const data = await projectsService.list();
-
       setItems(data);
     } catch (error) {
       console.error(error);
@@ -70,10 +66,7 @@ function AdminDashboard() {
 
   const onLogout = () => {
     authService.logout();
-
-    navigate({
-      to: "/admin/login",
-    });
+    navigate({ to: "/admin/login" });
   };
 
   const onSave = async (
@@ -89,9 +82,7 @@ function AdminDashboard() {
       }
 
       setEditing(null);
-
       setCreating(false);
-
       await refresh();
     } catch (error) {
       console.error(error);
@@ -100,12 +91,10 @@ function AdminDashboard() {
 
   const onDelete = async (id: string) => {
     const confirmed = confirm("Delete this project?");
-
     if (!confirmed) return;
 
     try {
       await projectsService.remove(id);
-
       refresh();
     } catch (error) {
       console.error(error);
@@ -133,56 +122,29 @@ function AdminDashboard() {
 
             <div>
               <p className="font-display text-sm font-semibold">Nova.dev</p>
-
               <p className="text-[10px] uppercase tracking-widest text-muted-foreground">Admin</p>
             </div>
           </Link>
 
-          <div className="flex items-center gap-2">
-            {/* <button
-              onClick={async () => {
-                await projectsService.reset();
-
-                refresh();
-              }}
-              className="inline-flex items-center gap-1.5 rounded-full glass px-4 py-2 text-xs hover:bg-primary/10"
-            >
-              <RotateCcw className="h-3.5 w-3.5" />
-              Reset demo
-            </button> */}
-
-            <button
-              onClick={onLogout}
-              className="inline-flex items-center gap-1.5 rounded-full glass px-4 py-2 text-xs hover:bg-destructive/20 hover:text-destructive"
-            >
-              <LogOut className="h-3.5 w-3.5" />
-              Logout
-            </button>
-          </div>
+          <button
+            onClick={onLogout}
+            className="inline-flex items-center gap-1.5 rounded-full glass px-4 py-2 text-xs hover:bg-destructive/20 hover:text-destructive"
+          >
+            <LogOut className="h-3.5 w-3.5" />
+            Logout
+          </button>
         </header>
 
         {/* Stats */}
 
         <div className="mt-8 grid gap-3 sm:grid-cols-3">
           {[
-            {
-              label: "Total projects",
-              value: items.length,
-            },
-
-            {
-              label: "Featured",
-              value: items.filter((p) => p.featured).length,
-            },
-
-            {
-              label: "Categories",
-              value: new Set(items.map((p) => p.category)).size,
-            },
+            { label: "Total projects", value: items.length },
+            { label: "Featured", value: items.filter((p) => p.featured).length },
+            { label: "Categories", value: new Set(items.map((p) => p.category)).size },
           ].map((s) => (
             <div key={s.label} className="rounded-2xl glass p-5">
               <p className="text-xs uppercase tracking-widest text-muted-foreground">{s.label}</p>
-
               <p className="mt-2 font-display text-3xl font-semibold gradient-text">{s.value}</p>
             </div>
           ))}
@@ -209,11 +171,8 @@ function AdminDashboard() {
             <thead className="bg-white/5 text-xs uppercase tracking-widest text-muted-foreground">
               <tr>
                 <th className="p-4 text-left">Project</th>
-
                 <th className="p-4 text-left">Category</th>
-
                 <th className="p-4 text-left">Featured</th>
-
                 <th className="p-4 text-right">Actions</th>
               </tr>
             </thead>
@@ -222,12 +181,8 @@ function AdminDashboard() {
               {items.map((p) => (
                 <motion.tr
                   key={p._id}
-                  initial={{
-                    opacity: 0,
-                  }}
-                  animate={{
-                    opacity: 1,
-                  }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
                   className="border-t border-white/5 hover:bg-white/[0.02]"
                 >
                   <td className="p-4">
@@ -235,7 +190,7 @@ function AdminDashboard() {
                       {p.images[0]?.url ? (
                         <img
                           src={p.images[0].url}
-                          alt=""
+                          alt={p.title.en}
                           className="h-10 w-14 rounded-md object-cover"
                         />
                       ) : (
@@ -243,10 +198,9 @@ function AdminDashboard() {
                       )}
 
                       <div className="min-w-0">
-                        <p className="truncate font-medium">{p.title}</p>
-
+                        <p className="truncate font-medium">{p.title.en}</p>
                         <p className="truncate text-xs text-muted-foreground">
-                          {p.shortDescription}
+                          {p.shortDescription.en}
                         </p>
                       </div>
                     </div>
@@ -274,11 +228,7 @@ function AdminDashboard() {
                       </button>
 
                       <button
-                        onClick={() => {
-                          if (p._id) {
-                            onDelete(p._id);
-                          }
-                        }}
+                        onClick={() => p._id && onDelete(p._id)}
                         className="flex h-8 w-8 items-center justify-center rounded-md glass text-destructive hover:bg-destructive/20"
                       >
                         <Trash2 className="h-3.5 w-3.5" />
@@ -305,7 +255,6 @@ function AdminDashboard() {
           initial={editing ?? undefined}
           onClose={() => {
             setEditing(null);
-
             setCreating(false);
           }}
           onSave={onSave}
